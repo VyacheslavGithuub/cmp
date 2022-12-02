@@ -5,6 +5,7 @@ const ContentSC = styled.section`
   flex-direction: column;
   width: 100%;
   background-color: ${({ theme }) => theme.main};
+
 `;
 
 export const useContentStyle = () => ({

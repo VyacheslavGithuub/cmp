@@ -5,9 +5,9 @@ const ContentParamsSC = styled.div`
   height: 40px;
   color: ${({ theme }) => theme.textAuxiliary};
   font-size: 14px;
-
+  padding-left: 20px;
   display: grid;
-  grid-template-columns: 110px 757px 200px 200px 200px 200px;
+  grid-template-columns: 10% 42% 12% 12% 12% 12%;
   border-bottom: 1px solid ${({ theme }) => theme.border};
   align-items: center;
 `;

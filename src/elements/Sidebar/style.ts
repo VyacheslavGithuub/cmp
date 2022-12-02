@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const SidebarSC = styled.div`
+const SidebarSC = styled.nav`
   width: 240px;
-  height: 100%;
+  min-height: calc(100vh - 44px);
   background-color: ${({ theme }) => theme.auxiliary};
   border-right: 1px solid ${({ theme }) => theme.border};
 `;
@@ -19,8 +19,8 @@ const SM_Item_SC = styled.li<{ isActive: boolean }>`
   background-color: ${({ isActive }) => isActive && "rgba(250, 250, 250, 0.5)"};
 
   img {
-    width: 15px;
-    margin-right: 15px;
+    width: 25px;
+    margin-right: 13px;
   }
 
   &:hover {

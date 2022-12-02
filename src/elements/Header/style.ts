@@ -8,8 +8,8 @@ const HeaderSC = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.border};
 
   img {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
   }
 `;

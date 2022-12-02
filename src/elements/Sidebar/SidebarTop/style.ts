@@ -16,7 +16,7 @@ const SidebarTopSC = styled.div`
     font-size: 12px;
   }
   img {
-    width: 15px;
+    width: 20px;
     cursor: pointer;
   }
 `;
