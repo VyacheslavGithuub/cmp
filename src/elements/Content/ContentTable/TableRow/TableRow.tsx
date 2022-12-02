@@ -17,7 +17,7 @@ export default function TableRow({ numberFile, data }: ITableRowProps) {
   const { child, salary, rowName, overheads, equipmentCosts, estimatedProfit } =
     data;
   const [isOpen, setOpen] = useState<boolean>(true);
-  console.log(isOpen);
+
 
   let number = numberFile;
   let leftPadding = number * 10;

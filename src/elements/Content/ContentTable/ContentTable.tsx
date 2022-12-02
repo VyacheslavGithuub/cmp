@@ -4,7 +4,7 @@ import TableRow from "./TableRow/TableRow";
 export default function ContentTable() {
   const eID = 31320;
   const { data, error, isLoading } = cmpApi.useGetEntityQuery(eID);
-  console.log(data);
+  // console.log(data);
 
   return (
     <div style={{ padding: "0px 20px" }}>

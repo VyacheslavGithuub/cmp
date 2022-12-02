@@ -12,4 +12,4 @@
 
 # Photo
 
-![image](https://user-images.githubusercontent.com/111220807/205220241-de90de13-7bb7-4419-a823-efde61749734.png)
+![image](https://user-images.githubusercontent.com/111220807/205341678-136e6d28-7c7f-435d-86e9-64b8646c0e90.png)

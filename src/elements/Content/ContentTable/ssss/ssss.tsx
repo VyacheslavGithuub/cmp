@@ -2,7 +2,7 @@ import { IGetEntity } from "../../../../../types";
 import TableRow from "../TableRow/TableRow";
 
 export default function Ssss(data: IGetEntity) {
-  return <TableRow {...data} />;
+  // return <TableRow {...data} />;
 }
 
 // const [addEntity, { data, error, isLoading }] = cmpApi.useAddEntityMutation();
