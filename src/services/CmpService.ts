@@ -7,6 +7,7 @@ export const cmpApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://185.244.172.108:8081/v1/outlay-rows/entity/",
   }),
+  tagTypes: ["File"],
   endpoints: (builder) => ({
     addEntity: builder.mutation<IAddEntity, IAddEntity>({
       query: (newEntity) => ({
@@ -19,6 +20,7 @@ export const cmpApi = createApi({
       query: (eID) => ({
         url: `${eID}/row/list`,
       }),
+      providesTags: (result) => ["File"],
     }),
     addRowCreate: builder.mutation<IAddRowCreateResponse, IAddRowCreate>({
       query: (data) => ({
@@ -26,6 +28,7 @@ export const cmpApi = createApi({
         method: "POST",
         body: data.sendData,
       }),
+      invalidatesTags: ["File"],
     }),
   }),
 });

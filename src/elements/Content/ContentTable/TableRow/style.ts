@@ -1,36 +1,60 @@
 import styled from "styled-components";
 
-const TableRowSC = styled.div`
-  width: 100%;
-  min-height: 60px;
-  color: ${({ theme }) => theme.textAuxiliary};
-  font-size: 14px;
-  padding-left: 20px;
-  display: grid;
-  grid-template-columns: 10% 42% 12% 12% 12% 12%;
+export const TableRowSC = styled.div`
+  display: flex;
+  padding-left: 10px;
   border-bottom: 1px solid ${({ theme }) => theme.border};
   align-items: center;
+  min-height: 60px;
 `;
-const TableLvlSC = styled.div<{ number: number; leftPadding: number }>`
+const TableLvlSC = styled.div<{ leftPadding: number }>`
   padding-left: ${({ leftPadding }) => leftPadding + "px"};
   display: flex;
+  width: 120px;
+
+  img {
+    width: 18px;
+    height: 17px;
+  }
 `;
 const TableRowWrapSC = styled.div<{ isOpen: boolean }>`
   min-height: 60px;
   max-height: ${({ isOpen }) => (isOpen ? "100%" : "0")};
   overflow: hidden;
   padding: ${({ isOpen }) => (isOpen ? "0" : "0")};
-  transition: all 0.3s ease-out;
 `;
 const TableLvlShowSC = styled.div<{ isOpen: boolean }>`
   cursor: pointer;
   margin-right: 5px;
   transition: rotate(${({ isOpen }) => (isOpen ? "0deg" : "180deg")});
+  margin-top: 5px;
 `;
-
+const FileDescriptionSC = styled.div`
+  line-height: 100%;
+  width: 40px;
+`;
+const TableLvlContentSC = styled.div<{ isVisible: boolean }>`
+  width: max-content;
+  padding: 6px;
+  background-color: ${({ isVisible }) => (isVisible ? "#414144" : "none")};
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+const IconMathSC = styled.div`
+  width: 15px;
+`;
+const OpenNewRowWrapSC = styled.div`
+  display: flex;
+`;
 export const useTableRowStyle = () => ({
   TableRowSC,
   TableLvlSC,
   TableRowWrapSC,
   TableLvlShowSC,
+  FileDescriptionSC,
+  TableLvlContentSC,
+  IconMathSC,
+  OpenNewRowWrapSC,
 });

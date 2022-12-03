@@ -2,23 +2,9 @@ export interface IAddEntity {
   id: number;
   rowName: string;
 }
-export interface IEntity {
-  child: [];
-  equipmentCosts: number;
-  estimatedProfit: number;
-  id: number;
-  machineOperatorSalary: number;
-  mainCosts: number;
-  materials: number;
-  mimExploitation: number;
-  overheads: number;
-  rowName: string;
-  salary: number;
-  supportCosts: number;
-  total: number;
-}
+
 export interface IGetEntity {
-  child: IEntity[];
+  child: IGetEntity[];
   equipmentCosts: number;
   estimatedProfit: number;
   id: number;
@@ -82,4 +68,26 @@ export interface IAddRowCreate {
     salary: number;
     supportCosts: number;
   };
+}
+//
+export interface ITableInputProps {
+  id: number | null;
+  rowName?: string;
+  salary?: number;
+  equipmentCosts?: number;
+  overheads?: number;
+  estimatedProfit?: number;
+}
+export interface IFormInput {
+  rowName: string;
+  salary: number;
+  equipmentCosts: number;
+  overheads: number;
+  estimatedProfit: number;
+  machineOperatorSalary: number;
+  mainCosts: number;
+  materials: number;
+  mimExploitation: number;
+  parentId: number | null;
+  supportCosts: number;
 }

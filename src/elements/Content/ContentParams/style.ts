@@ -7,7 +7,7 @@ const ContentParamsSC = styled.div`
   font-size: 14px;
   padding-left: 20px;
   display: grid;
-  grid-template-columns: 10% 42% 12% 12% 12% 12%;
+  grid-template-columns: 110px 1fr 200px 200px 200px 200px;
   border-bottom: 1px solid ${({ theme }) => theme.border};
   align-items: center;
 `;
