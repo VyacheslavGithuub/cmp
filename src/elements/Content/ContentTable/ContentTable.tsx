@@ -10,7 +10,6 @@ import IconFile from "../../../img/IconFile.png";
 function ContentTable() {
   const eID = 31344;
   const { data, error, isLoading } = cmpApi.useGetEntityQuery(eID);
-  console.log(data);
 
   const { ContentTableSC, IconCrossSC, CreateNewRowWrapSC, NewRowIconSC } =
     useContentTableStyle();
@@ -24,14 +23,19 @@ function ContentTable() {
       {/* Если таблица пуста, отображаем инпут для создания первой строки */}
       {data && data.length > 0
         ? data.map((i) => <TableRow key={i.id} isData={i} numberFile={0} />)
-        : !isLoading && <TableInput id={null} />}
+        : !isLoading &&
+          !error && (
+            <div style={{ marginTop: "15px" }}>
+              <TableInput id={null} variantForm="addArrow" />
+            </div>
+          )}
 
       {isShowInput && (
         <CreateNewRowWrapSC>
           <NewRowIconSC>
             <img src={IconFile} alt={"Icon"} />
           </NewRowIconSC>
-          <TableInput id={null} />
+          <TableInput id={null} variantForm="addArrow" />
         </CreateNewRowWrapSC>
       )}
       {data && data.length > 0 && (

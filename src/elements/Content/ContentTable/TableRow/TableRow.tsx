@@ -8,6 +8,8 @@ import IconTriangle from "../../../../img/IconTriangle";
 import TableInput from "../TableInput/TableInput";
 import IconCross from "../../../../img/IconCross";
 import IconMinus from "../../../../img/IconMinus";
+import IconWasteBin from "../../../../img/IconWasteBin.png";
+import { cmpApi } from "../../../../services/CmpService";
 
 interface ITableRowProps {
   numberFile: number;
@@ -36,10 +38,18 @@ function TableRow({ numberFile, isData }: ITableRowProps) {
   } = isData;
 
   const [isOpen, setOpen] = useState<boolean>(true);
-
   const [isFileDescription, setFileDescription] = useState<boolean>(false);
-
   const [isOpenNewRow, setOpenNewRow] = useState<boolean>(false);
+  const [deleteRow, {}] = cmpApi.useDeleteRowMutation();
+  // useDeleteRowMutation
+  const handleDeleteRow = () => {
+    let data = {
+      eID: 31344,
+      rID: id,
+    };
+    deleteRow(data);
+  };
+
   const handleOpenNewRow = () => setOpenNewRow(!isOpenNewRow);
 
   let number = numberFile;
@@ -84,6 +94,12 @@ function TableRow({ numberFile, isData }: ITableRowProps) {
                   <IconMathSC onClick={handleOpenNewRow}>
                     {isOpenNewRow ? <IconMinus /> : <IconCross />}
                   </IconMathSC>
+                  {/* delete row */}
+                  <img
+                    src={IconWasteBin}
+                    alt="icon"
+                    onClick={handleDeleteRow}
+                  />
                 </FileDescriptionSC>
               )}
             </TableLvlContentSC>
@@ -97,6 +113,7 @@ function TableRow({ numberFile, isData }: ITableRowProps) {
             equipmentCosts={equipmentCosts}
             overheads={overheads}
             estimatedProfit={estimatedProfit}
+            variantForm="updateRow"
           />
         </TableRowSC>
 
@@ -106,7 +123,7 @@ function TableRow({ numberFile, isData }: ITableRowProps) {
             <TableLvlSC leftPadding={leftPadding + 26}>
               <img src={IconFile} alt={number + ""} />
             </TableLvlSC>
-            <TableInput id={id} />
+            <TableInput id={id} variantForm="addArrow" />
           </TableRowSC>
         )}
 

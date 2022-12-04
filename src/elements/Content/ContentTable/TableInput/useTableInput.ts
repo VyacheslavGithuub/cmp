@@ -1,5 +1,4 @@
 import { ITableInputProps } from "./../../../../../types.d";
-import { useEffect } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { IFormInput } from "../../../../../types";
@@ -12,10 +11,12 @@ export default function useTableInput({
   equipmentCosts,
   overheads,
   estimatedProfit,
+  variantForm,
 }: ITableInputProps) {
   const [addRowCreate, {}] = cmpApi.useAddRowCreateMutation();
+  const [updateRow, {}] = cmpApi.useUpdateRowMutation();
 
-  const { control, handleSubmit, setFocus, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       equipmentCosts: equipmentCosts || 0,
       estimatedProfit: estimatedProfit || 0,
@@ -31,7 +32,7 @@ export default function useTableInput({
     },
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = (dataForm) => {
+  const sendAddRow = (dataForm: any) => {
     let sendData = {
       eID: 31344,
       sendData: dataForm,
@@ -45,10 +46,44 @@ export default function useTableInput({
       estimatedProfit: 0,
     });
   };
+  const sendUpdateRow = (dataForm: any) => {
+    let {
+      equipmentCosts,
+      estimatedProfit,
+      machineOperatorSalary,
+      mainCosts,
+      materials,
+      mimExploitation,
+      overheads,
+      rowName,
+      salary,
+      supportCosts,
+    } = dataForm;
+    let updateData = {
+      eID: 31344,
+      rID: id,
+      request: {
+        equipmentCosts: equipmentCosts,
+        estimatedProfit: estimatedProfit,
+        machineOperatorSalary: machineOperatorSalary,
+        mainCosts: mainCosts,
+        materials: materials,
+        mimExploitation: mimExploitation,
+        overheads: overheads,
+        rowName: rowName,
+        salary: salary,
+        supportCosts: supportCosts,
+      },
+    };
+    updateRow(updateData);
+  };
 
-  useEffect(() => {
-    setFocus("rowName");
-  }, [setFocus]);
+  const onSubmit: SubmitHandler<IFormInput> = (dataForm) => {
+    variantForm === "addArrow"
+      ? sendAddRow(dataForm)
+      : variantForm === "updateRow" && sendUpdateRow(dataForm);
+  };
+
   return {
     handleSubmit,
     onSubmit,

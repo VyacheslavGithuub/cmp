@@ -11,8 +11,10 @@ export default function TableInput({
   equipmentCosts,
   overheads,
   estimatedProfit,
+  variantForm,
 }: ITableInputProps) {
   const { FormSC, TableInputSC } = useTableInputStyle();
+
   const { handleSubmit, onSubmit, control } = useTableInput({
     id,
     rowName,
@@ -20,6 +22,7 @@ export default function TableInput({
     equipmentCosts,
     overheads,
     estimatedProfit,
+    variantForm,
   });
 
   return (

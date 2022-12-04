@@ -12,7 +12,7 @@ export default function IconTriangle({ rotate }: IIconTriangleProps) {
       width="13px"
       height="13px"
       viewBox="0 0 512 512"
-      enable-background="new 0 0 512 512"
+      enableBackground="new 0 0 512 512"
       fill="#8e8e8f"
       transform={`rotate(${rotate})`}
     >

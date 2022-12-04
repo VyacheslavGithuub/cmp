@@ -18,6 +18,29 @@ export interface IGetEntity {
   supportCosts: number;
   total: number;
 }
+
+//
+export interface IRowDeleteProps {
+    eID: number
+    rID: number
+}
+//
+export interface IRowUpdateProps {
+  eID: number
+  rID: number | null;
+  request: {
+      equipmentCosts: number;
+      estimatedProfit: number;
+      machineOperatorSalary: number;
+      mainCosts: number;
+      materials: number;
+      mimExploitation: number;
+      overheads: number;
+      rowName: string;
+      salary: number;
+      supportCosts: number;
+  }
+}
 //
 export interface ICurrent {
   id: number;
@@ -77,6 +100,7 @@ export interface ITableInputProps {
   equipmentCosts?: number;
   overheads?: number;
   estimatedProfit?: number;
+  variantForm: "addArrow" | "updateRow"
 }
 export interface IFormInput {
   rowName: string;

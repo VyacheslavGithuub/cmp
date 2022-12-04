@@ -30,6 +30,9 @@ const TableLvlShowSC = styled.div<{ isOpen: boolean }>`
   margin-top: 5px;
 `;
 const FileDescriptionSC = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
   line-height: 100%;
   width: 40px;
 `;
