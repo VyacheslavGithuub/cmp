@@ -11,7 +11,7 @@
 
 # Start project
 
-### git clone https://github.com/VyacheslavGithuub/cmp.git
+### git clone https://github.com/VyacheslavGithuub/file_structure.git
 
 ### npm install
 
