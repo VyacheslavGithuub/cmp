@@ -1,12 +1,10 @@
 import React from "react";
-import { ITableRowProps } from "../../../../../types";
+import { IGetEntity, ITableRowProps } from "../../../../../types";
 import { useTableRowStyle } from "./style";
 import TableInput from "../TableInput/TableInput";
 import { useTableRow } from "./useTableRow";
 import TableLvl from "./TableLvl/TableLvl";
 import TableAddNewRow from "../TableAddNewRow/TableAddNewRow";
-
-
 
 function TableRow({ numberFile, isData }: ITableRowProps) {
   const { TableRowSC, TableRowWrapSC } = useTableRowStyle();
@@ -64,7 +62,7 @@ function TableRow({ numberFile, isData }: ITableRowProps) {
         )}
         {/* Если в массиве есть child используем рекурсию */}
         {child.length > 0 &&
-          child.map((i) => (
+          child.map((i: IGetEntity) => (
             <TableRow key={i.id} isData={i} numberFile={nestingNumber} />
           ))}
       </TableRowWrapSC>

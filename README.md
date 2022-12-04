@@ -1,6 +1,13 @@
 # Pajes
 
-### https://vyacheslavgithuub.github.io/cmp/
+### https://vyacheslavgithuub.github.io/file_structure/
+
+# Stack
+
+### React
+### Redux Toolkit 
+### React-hook-form
+### Styled-components
 
 # Start project
 
@@ -12,4 +19,4 @@
 
 # Photo
 
-![image](https://user-images.githubusercontent.com/111220807/205341678-136e6d28-7c7f-435d-86e9-64b8646c0e90.png)
+![image](https://user-images.githubusercontent.com/111220807/205486936-cd63d661-7a66-4727-b78f-3a65759b727b.png)

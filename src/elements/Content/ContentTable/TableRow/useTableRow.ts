@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { ITableRowProps } from "./TableRow";
-
+import { ITableRowProps } from "../../../../../types";
 
 export function useTableRow({ numberFile, isData }: ITableRowProps) {
   const {
