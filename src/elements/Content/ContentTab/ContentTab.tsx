@@ -1,8 +1,6 @@
+import { IContentTabProps } from "../../../../types";
 import { useContentTabStyle } from "./style";
 
-interface IContentTabProps {
-  titleTab: string;
-}
 export default function ContentTab({ titleTab }: IContentTabProps) {
   const { ContentTabSC, ContentTabTitleSC } = useContentTabStyle();
 

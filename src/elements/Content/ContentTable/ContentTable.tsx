@@ -1,43 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import TableRow from "./TableRow/TableRow";
 import IconCross from "../../../img/IconCross";
 import IconMinus from "../../../img/IconMinus";
-import { cmpApi } from "../../../services/CmpService";
 import { useContentTableStyle } from "./style";
-import TableInput from "./TableInput/TableInput";
-import TableRow from "./TableRow/TableRow";
-import IconFile from "../../../img/IconFile.png";
+import useContentTable from "./useContentTable";
+import TableAddNewRow from "./TableAddNewRow/TableAddNewRow";
 
+// Основной компонент таблицы
 function ContentTable() {
-  const eID = 31344;
-  const { data, error, isLoading } = cmpApi.useGetEntityQuery(eID);
-
-  const { ContentTableSC, IconCrossSC, CreateNewRowWrapSC, NewRowIconSC } =
-    useContentTableStyle();
-  const [isShowInput, setShowInput] = useState(false);
-  const addTableInput = () => setShowInput(!isShowInput);
+  // Подключаем стили
+  const { ContentTableSC, IconCrossSC } = useContentTableStyle();
+  // деструктуризируем хук
+  const { isLoading, error, data, isShowInput, addTableInput } =
+    useContentTable();
 
   return (
     <ContentTableSC>
+      {/* Проверки */}
       {isLoading && <h2>Loading...</h2>}
-      {error && "Error!!!"}
-      {/* Если таблица пуста, отображаем инпут для создания первой строки */}
+      {error &&
+        "К сожалению Github pages не поддерживает запросы на незащищенный http:// "}
+      {/* Отображаем существующие строки таблицы */}
       {data && data.length > 0
         ? data.map((i) => <TableRow key={i.id} isData={i} numberFile={0} />)
-        : !isLoading &&
-          !error && (
-            <div style={{ marginTop: "15px" }}>
-              <TableInput id={null} variantForm="addArrow" />
-            </div>
-          )}
-
-      {isShowInput && (
-        <CreateNewRowWrapSC>
-          <NewRowIconSC>
-            <img src={IconFile} alt={"Icon"} />
-          </NewRowIconSC>
-          <TableInput id={null} variantForm="addArrow" />
-        </CreateNewRowWrapSC>
-      )}
+        : // Если таблица пуста, отобразить инпут для создания
+          !isLoading &&
+          !error && <TableAddNewRow id={null} variantForm="addArrow" />}
+      {/* Если нажали на +/- отобразим/скроем инпут для создания новой строки */}
+      {isShowInput && <TableAddNewRow id={null} variantForm="addArrow" />}
+      {/* Если таблица не пуста, показываем +/- для создания новой строки */}
       {data && data.length > 0 && (
         <IconCrossSC onClick={addTableInput}>
           {isShowInput ? <IconMinus /> : <IconCross />}

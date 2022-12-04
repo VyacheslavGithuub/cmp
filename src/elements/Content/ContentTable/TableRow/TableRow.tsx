@@ -1,109 +1,46 @@
-import React, { useState } from "react";
-import { IGetEntity } from "../../../../../types";
+import React from "react";
+import { ITableRowProps } from "../../../../../types";
 import { useTableRowStyle } from "./style";
-import IconFile from "../../../../img/IconFile.png";
-import IconFolderOne from "../../../../img/IconFolderOne.png";
-import IconFolderTwo from "../../../../img/IconFolderTwo.png";
-import IconTriangle from "../../../../img/IconTriangle";
 import TableInput from "../TableInput/TableInput";
-import IconCross from "../../../../img/IconCross";
-import IconMinus from "../../../../img/IconMinus";
-import IconWasteBin from "../../../../img/IconWasteBin.png";
-import { cmpApi } from "../../../../services/CmpService";
+import { useTableRow } from "./useTableRow";
+import TableLvl from "./TableLvl/TableLvl";
+import TableAddNewRow from "../TableAddNewRow/TableAddNewRow";
 
-interface ITableRowProps {
-  numberFile: number;
-  isData: IGetEntity;
-}
+
 
 function TableRow({ numberFile, isData }: ITableRowProps) {
-  const {
-    TableRowSC,
-    TableLvlSC,
-    TableRowWrapSC,
-    TableLvlShowSC,
-    FileDescriptionSC,
-    TableLvlContentSC,
-    IconMathSC,
-    OpenNewRowWrapSC,
-  } = useTableRowStyle();
+  const { TableRowSC, TableRowWrapSC } = useTableRowStyle();
+
   const {
     id,
     child,
     salary,
+    nestingNumber,
+    isOpen,
+    setOpen,
     rowName,
     overheads,
+    leftPadding,
     equipmentCosts,
     estimatedProfit,
-  } = isData;
-
-  const [isOpen, setOpen] = useState<boolean>(true);
-  const [isFileDescription, setFileDescription] = useState<boolean>(false);
-  const [isOpenNewRow, setOpenNewRow] = useState<boolean>(false);
-  const [deleteRow, {}] = cmpApi.useDeleteRowMutation();
-  // useDeleteRowMutation
-  const handleDeleteRow = () => {
-    let data = {
-      eID: 31344,
-      rID: id,
-    };
-    deleteRow(data);
-  };
-
-  const handleOpenNewRow = () => setOpenNewRow(!isOpenNewRow);
-
-  let number = numberFile;
-  let leftPadding = number * 20;
-  child.length > 0 ? (number = numberFile + 1) : (number = 0);
-
-  let typeFile =
-    number === 1
-      ? IconFolderOne
-      : number === 2
-      ? IconFolderTwo
-      : number === 0
-      ? IconFile
-      : IconFile;
-
-  //////////////
+    isOpenNewRow,
+    handleOpenNewRow,
+  } = useTableRow({ isData: isData, numberFile: numberFile });
 
   return (
     <>
       <TableRowWrapSC isOpen={isOpen}>
         <TableRowSC>
           {/* Перый столбец */}
-          <TableLvlSC leftPadding={leftPadding}>
-            {/* Треугольник + функция отвечающая за сокрытие папок */}
-            {number > 0 && (
-              <TableLvlShowSC onClick={() => setOpen(!isOpen)} isOpen={isOpen}>
-                <IconTriangle rotate={isOpen ? "0" : "180"} />
-              </TableLvlShowSC>
-            )}
-            {/* функциональный блок с серым фоном */}
-            <TableLvlContentSC
-              isVisible={isFileDescription}
-              onMouseOver={() => setFileDescription(true)}
-              onMouseOut={() => setFileDescription(false)}
-            >
-              {/* Отображаем иконку папка или файл */}
-              <img src={typeFile} alt={number + ""} />
-
-              {/* показываем дополнительные кнопки */}
-              {isFileDescription && (
-                <FileDescriptionSC>
-                  <IconMathSC onClick={handleOpenNewRow}>
-                    {isOpenNewRow ? <IconMinus /> : <IconCross />}
-                  </IconMathSC>
-                  {/* delete row */}
-                  <img
-                    src={IconWasteBin}
-                    alt="icon"
-                    onClick={handleDeleteRow}
-                  />
-                </FileDescriptionSC>
-              )}
-            </TableLvlContentSC>
-          </TableLvlSC>
+          <TableLvl
+            id={id}
+            isOpen={isOpen}
+            setOpen={setOpen}
+            leftPadding={leftPadding}
+            nestingNumber={nestingNumber}
+            isOpenNewRow={isOpenNewRow}
+            handleOpenNewRow={handleOpenNewRow}
+          />
 
           {/*следом отображаем  все оствльные данные в строке*/}
           <TableInput
@@ -119,17 +56,16 @@ function TableRow({ numberFile, isData }: ITableRowProps) {
 
         {/* Создание новой строки */}
         {isOpenNewRow && (
-          <TableRowSC>
-            <TableLvlSC leftPadding={leftPadding + 26}>
-              <img src={IconFile} alt={number + ""} />
-            </TableLvlSC>
-            <TableInput id={id} variantForm="addArrow" />
-          </TableRowSC>
+          <TableAddNewRow
+            id={id}
+            variantForm="addArrow"
+            leftPadding={leftPadding + 36}
+          />
         )}
-
+        {/* Если в массиве есть child используем рекурсию */}
         {child.length > 0 &&
           child.map((i) => (
-            <TableRow key={i.id} isData={i} numberFile={number} />
+            <TableRow key={i.id} isData={i} numberFile={nestingNumber} />
           ))}
       </TableRowWrapSC>
     </>

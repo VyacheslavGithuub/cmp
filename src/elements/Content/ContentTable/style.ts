@@ -8,19 +8,8 @@ const IconCrossSC = styled.div`
   width: 20px;
   height: 20px;
 `;
-const CreateNewRowWrapSC = styled.div`
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-`;
-const NewRowIconSC = styled.div`
-  width: 110px;
-  padding-left: 15px;
-`;
 
 export const useContentTableStyle = () => ({
   ContentTableSC,
   IconCrossSC,
-  CreateNewRowWrapSC,
-  NewRowIconSC,
 });

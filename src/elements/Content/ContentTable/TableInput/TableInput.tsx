@@ -1,9 +1,9 @@
 import useTableInput from "./useTableInput";
 import { Controller } from "react-hook-form";
-import IconFile from "../../../../img/IconFile.png";
 import { ITableInputProps } from "../../../../../types";
 import { useTableInputStyle } from "./style";
 
+// Компонент для отправки данных на сервер / переиспользуем
 export default function TableInput({
   id,
   rowName,
@@ -14,7 +14,6 @@ export default function TableInput({
   variantForm,
 }: ITableInputProps) {
   const { FormSC, TableInputSC } = useTableInputStyle();
-
   const { handleSubmit, onSubmit, control } = useTableInput({
     id,
     rowName,
@@ -26,7 +25,7 @@ export default function TableInput({
   });
 
   return (
-    <FormSC onSubmitCapture={handleSubmit(onSubmit)}>
+    <FormSC onSubmit={handleSubmit(onSubmit)}>
       <Controller
         name="rowName"
         control={control}
@@ -54,6 +53,7 @@ export default function TableInput({
         control={control}
         render={({ field }) => <TableInputSC {...field} />}
       />
+      {/* Костыльно, но иначе, нажимая на Enter, форма не отправляется */}
       <input
         type="submit"
         style={{
@@ -66,3 +66,5 @@ export default function TableInput({
     </FormSC>
   );
 }
+
+ 

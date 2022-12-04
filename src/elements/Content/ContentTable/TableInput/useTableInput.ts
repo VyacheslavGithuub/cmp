@@ -13,9 +13,13 @@ export default function useTableInput({
   estimatedProfit,
   variantForm,
 }: ITableInputProps) {
+  // Достаём экшен на добавление объекта на сервер
   const [addRowCreate, {}] = cmpApi.useAddRowCreateMutation();
+  // Достам экшен для обновлённия оъекта
   const [updateRow, {}] = cmpApi.useUpdateRowMutation();
-
+  // Получаем eID
+  const eID = import.meta.env.VITE_SOME_KEY;
+  // Достаём всё необходимое из useForm и объявляем defaultValues
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       equipmentCosts: equipmentCosts || 0,
@@ -31,53 +35,25 @@ export default function useTableInput({
       supportCosts: 0,
     },
   });
-
+  // Функция для добавления строки на сервер
   const sendAddRow = (dataForm: any) => {
     let sendData = {
-      eID: 31344,
+      eID: eID,
       sendData: dataForm,
     };
     addRowCreate(sendData);
-    reset({
-      rowName: "",
-      salary: 0,
-      equipmentCosts: 0,
-      overheads: 0,
-      estimatedProfit: 0,
-    });
+    reset();
   };
+  // Функция для добавления измененной строки
   const sendUpdateRow = (dataForm: any) => {
-    let {
-      equipmentCosts,
-      estimatedProfit,
-      machineOperatorSalary,
-      mainCosts,
-      materials,
-      mimExploitation,
-      overheads,
-      rowName,
-      salary,
-      supportCosts,
-    } = dataForm;
     let updateData = {
-      eID: 31344,
+      eID: eID,
       rID: id,
-      request: {
-        equipmentCosts: equipmentCosts,
-        estimatedProfit: estimatedProfit,
-        machineOperatorSalary: machineOperatorSalary,
-        mainCosts: mainCosts,
-        materials: materials,
-        mimExploitation: mimExploitation,
-        overheads: overheads,
-        rowName: rowName,
-        salary: salary,
-        supportCosts: supportCosts,
-      },
+      request: dataForm,
     };
     updateRow(updateData);
   };
-
+  // Функция для отправки формы
   const onSubmit: SubmitHandler<IFormInput> = (dataForm) => {
     variantForm === "addArrow"
       ? sendAddRow(dataForm)
