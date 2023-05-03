@@ -3,7 +3,6 @@ import { useTableAddNewRowStyle } from "./style";
 import IconFile from "../../../../img/IconFile.png";
 import { ITableAddNewRowProps } from "../../../../../types";
 
-
 export default function TableAddNewRow({
   id,
   variantForm,

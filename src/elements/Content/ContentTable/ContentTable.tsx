@@ -13,13 +13,13 @@ function ContentTable() {
   // деструктуризируем хук
   const { isLoading, error, data, isShowInput, addTableInput } =
     useContentTable();
-
+  // IconFolder
   return (
     <ContentTableSC>
       {/* Проверки */}
       {isLoading && <h2>Loading...</h2>}
       {error &&
-        "К сожалению Github pages не поддерживает запросы на незащищенный http:// "}
+        "К сожалению Github pages не поддерживает запросы на незащищенный http:// Для тестирования проекта скачайте его через git clone https://github.com/VyacheslavGithuub/file_structure.git "}
       {/* Отображаем существующие строки таблицы */}
       {data && data.length > 0
         ? data.map((i) => <TableRow key={i.id} isData={i} numberFile={0} />)
